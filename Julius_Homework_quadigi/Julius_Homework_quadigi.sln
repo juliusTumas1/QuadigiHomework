@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31624.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeasurementSampler", "MeasurementSampler.csproj", "{9ED47FA0-C72D-438D-B869-C1A6D8552E0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeasurementSamplerTests", "..\MeasurementSamplerTest\MeasurementSamplerTests.csproj", "{F9A8D0FA-67E9-410D-B609-9B706231D61F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9ED47FA0-C72D-438D-B869-C1A6D8552E0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9ED47FA0-C72D-438D-B869-C1A6D8552E0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9ED47FA0-C72D-438D-B869-C1A6D8552E0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9ED47FA0-C72D-438D-B869-C1A6D8552E0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9A8D0FA-67E9-410D-B609-9B706231D61F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9A8D0FA-67E9-410D-B609-9B706231D61F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9A8D0FA-67E9-410D-B609-9B706231D61F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9A8D0FA-67E9-410D-B609-9B706231D61F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AF2B71A7-0369-419F-8002-839822DA9A98}
+	EndGlobalSection
+EndGlobal
