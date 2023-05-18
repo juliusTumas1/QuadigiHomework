@@ -22,11 +22,11 @@ public class TestHandler
     public TestHandler()
     {
         var config = new ConfigurationBuilder()
-            .AddJsonFile("appSettings.test.json", true, true)
+            .AddJsonFile(Constants.AppSettingsFileName, true, true)
             .Build();
 
         var appSettings = new AppSettings();
-        config.GetSection("AppSettings").Bind(appSettings);
+        config.GetSection(Constants.AppSettingsSectionName).Bind(appSettings);
 
 
         _projectName = appSettings.ProjectName;
@@ -57,6 +57,7 @@ public class TestHandler
 
         return createdWorkItem;
     }
+
     public async Task<WorkItem> UpdateWorkItemOnAzureDevOps(JsonPatchDocument patchDocument, int itemId)
     {
         return await _workItemTrackingHttpClient.UpdateWorkItemAsync(patchDocument, _projectName, itemId);

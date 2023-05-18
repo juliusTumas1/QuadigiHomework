@@ -29,13 +29,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="appSettings.test.json">
+    <None Update="Configuration\appSettings.test.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="template_appSettings.test.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="appSettings.test.json">
+    <None Update="Configuration\template_appsettings.test.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

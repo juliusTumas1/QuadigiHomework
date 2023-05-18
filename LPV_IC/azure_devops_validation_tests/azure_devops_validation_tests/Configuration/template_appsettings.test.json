@@ -1,0 +1,11 @@
+﻿{
+  "AppSettings": {
+    "baseUri": "<Base Uri for Azure DevoOps>",
+    "organizationName": "<Organization name>",
+    "projectName": "<Project name>",
+    "projectTeamName": "<Project Team name>",
+    "userPersonalAccessToken": "<Personal access token>",
+    "userDisplayName": "<userDisplayName>",
+    "userId": "<userId>"
+  }
+}

@@ -13,7 +13,7 @@ public static class TestHelper
             new JsonPatchOperation
             {
                 Operation = Operation.Add,
-                Path = $"/fields/{field.Key}",
+                Path = $"{Constants.PatchOperationFieldPathPrefix}{field.Key}",
                 Value = field.Value
             }));
         return document;

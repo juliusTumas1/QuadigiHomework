@@ -17,33 +17,31 @@ public class WorkItemTests : IDisposable
         GC.SuppressFinalize(this);
     }
 
-
-    [Fact]
-    public async Task CanCreateTsr()
+    [Theory]
+    [ClassData(typeof(WorkItemTypeTestData))]
+    public async Task CanCreateWorkItem(string type, Dictionary<string, object> expectedFields)
     {
-        var expectedFields = CreateRequiredTsrFieldDictionary();
-
         var document = TestHelper.CreatePatchDocumentForFields(expectedFields);
 
-        var createdWorkItem = await _testHandler.CreateWorkItemOnAzureDevOps(document, "TSR");
+        var createdWorkItem = await _testHandler.CreateWorkItemOnAzureDevOps(document, type);
         Assert.NotNull(createdWorkItem);
         Assert.True(TestHelper.DictionaryContainsAllKeyValuePairs(createdWorkItem.Fields, expectedFields));
     }
 
-    [Fact]
-    public async Task CanUpdateTsrFields()
+    [Theory]
+    [ClassData(typeof(WorkItemTypeTestData))]
+    public async Task CanUpdateWorkItemFields(string type, Dictionary<string, object> expectedFields)
     {
-        var expectedFields = CreateRequiredTsrFieldDictionary();
         var document = TestHelper.CreatePatchDocumentForFields(expectedFields);
 
-        var createdWorkItem = await _testHandler.CreateWorkItemOnAzureDevOps(document, "TSR");
+        var createdWorkItem = await _testHandler.CreateWorkItemOnAzureDevOps(document, type);
         Assert.NotNull(createdWorkItem.Id);
 
         var fieldsForUpdate = new Dictionary<string, object>
         {
-            { "System.Title", "Updated TSR" },
-            { "System.Description", "Updated Description" },
-            { "Custom.Type", "RCM" }
+            { "System.Title", "Updated " + type },
+            { "System.Description", "Updated " + type + " Description" },
+            { "Custom.ReviewedbyLeaderVerification", _testHandler.UserIdentity }
         };
 
         var updateDocument = TestHelper.CreatePatchDocumentForFields(fieldsForUpdate);
@@ -53,13 +51,13 @@ public class WorkItemTests : IDisposable
         Assert.True(TestHelper.DictionaryContainsAllKeyValuePairs(updatedWorkItem.Fields, fieldsForUpdate));
     }
 
-    [Fact]
-    public async Task UpdatingTsrWorkItemId_WillNotHaveAnyEffect()
+    [Theory]
+    [ClassData(typeof(WorkItemTypeTestData))]
+    public async Task UpdatingWorkItemId_WillNotHaveAnyEffect(string type, Dictionary<string, object> expectedFields)
     {
-        var expectedFields = CreateRequiredTsrFieldDictionary();
         var document = TestHelper.CreatePatchDocumentForFields(expectedFields);
 
-        var createdWorkItem = await _testHandler.CreateWorkItemOnAzureDevOps(document, "TSR");
+        var createdWorkItem = await _testHandler.CreateWorkItemOnAzureDevOps(document, type);
         Assert.NotNull(createdWorkItem.Id);
 
         var fieldsForUpdate = new Dictionary<string, object>
@@ -74,22 +72,4 @@ public class WorkItemTests : IDisposable
         Assert.False(TestHelper.DictionaryContainsAllKeyValuePairs(updatedWorkItem.Fields, fieldsForUpdate));
         Assert.True(TestHelper.DictionaryContainsAllKeyValuePairs(updatedWorkItem.Fields, expectedFields));
     }
-
-    private Dictionary<string, object> CreateRequiredTsrFieldDictionary()
-    {
-        return new Dictionary<string, object>
-        {
-            { "System.Title", "Test TSR" },
-            { "System.Description", "This is a new TSR work item created using the Azure DevOps .NET SDK." },
-            { "System.WorkItemType", "TSR" },
-            { "Custom.Type", "Requirement" },
-            { "Custom.Verificationmethod", "MethodA" },
-            { "Custom.VerificationLevel", "LevelA" },
-            { "Custom.ReviewedbyProductManagement", _testHandler.UserIdentity },
-            { "Custom.ReviewedbyProjectManagement", _testHandler.UserIdentity },
-            { "Custom.ReviewedbySystemEngineering", _testHandler.UserIdentity },
-            { "Custom.ReviewedbyLeaderVerification", _testHandler.UserIdentity }
-        };
-    }
-
 }
